@@ -1,0 +1,30 @@
+create database inventory_management;
+use inventory_management;
+
+
+
+CREATE TABLE suppliers(supplierID int AUTO_INCREMENT PRIMARY KEY , supplierNAme varchar (100), contactName varchar(100),phone varchar(20), email varchar (100), address varchar(255), city varchar(50),country varchar(50));
+
+
+
+CREATE TABLE orders(orderId int AUTO_INCREMENT PRIMARY KEY, customerId int , orderDate date , statusOrder varchar(20), totalAmount decimal(12,2));
+
+
+
+CREATE TABLE category(categoryID int AUTO_INCREMENT PRIMARY KEY , categoryName varchar(50), description varchar(255));
+
+
+
+CREATE TABLE products(productID int AUTO_INCREMENT PRIMARY KEY, productName varchar(100), categoryID int , supplierID int , unitPrice decimal(10,2),qauntityINStock int , reorderLevel int , discontinued boolean , FOREIGN KEY(categoryID) REFERENCES category(categoryID),FOREIGN KEY(supplierID) REFERENCES suppliers(supplierID));
+
+
+CREATE TABLE customers(customerID int AUTO_INCREMENT PRIMARY KEY , customerNAme varchar(100), email varchar (100), phone varchar(20), city varchar(50), country varchar(50));
+
+
+CREATE table payments(paymentID int AUTO_INCREMENT PRIMARY KEY , orderId int , paymentDate date ,amount decimal (10,2), paymentMethod varchar (50));
+
+
+CREATE TABLE orderItems(orderItemId int AUTO_INCREMENT PRIMARY KEY , orderId int , productId int , quantity int , unitPrice decimal (10,2), discount decimal(5,2), FOREIGN KEY (orderId ) REFERENCES orders(orderId), FOREIGN KEY(productId) REFERENCES products(productId));
+
+
+
